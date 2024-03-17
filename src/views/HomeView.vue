@@ -1,14 +1,97 @@
 <script setup>
 import { ref } from 'vue'
+import board from '../components/RecentActivities.vue'
+import Card from '../components/Card.vue'
 
 
-const input = ref('')
+const pic_txt = ref(
+  [
+    {
+      pic_phnoe: '/music _phone.png',
+      pic: '/music.png',
+      txt: '演出'
+    },
+    {
+      pic_phnoe: '/heart_phone.png',
+      pic: '/heart.png',
+      txt: '聯誼'
+    },
+    {
+      pic_phnoe: '/museum_phone.png',
+      pic: '/museum.png',
+      txt: '展覽'
+    },
+    {
+      pic_phnoe: '/cutlery_phone.png',
+      pic: '/cutlery.png',
+      txt: '美食'
+    },
+
+    {
+      pic_phnoe: '/Vector_phone.png',
+      pic: '/Vector.png',
+      txt: '戶外'
+    },
+    {
+      pic_phnoe: '',
+      pic_phnoe: '',
+      txt: '探索更多'
+    },
+  ]
+)
+
+
+const card_group = ref([
+  {
+    data: '19 MAY 2023',
+    img: '/a1.png',
+    subtitle: '邪典電影派對——房間',
+    txt: '你有聽說過「大災難家」裡面的主角 Tommy Wiseau 製作的「史上最爛的電影」——房間嗎？在美國甚至演變成一種邪教、一種派對的形式，...',
+    category: '社群活動'
+  },
+  {
+    data: '23 MAY 2023',
+    img: '/a2.png',
+    subtitle: '怪舞俱樂部',
+    txt: '覺得自己的舞蹈細胞異於常人？每次隨著音樂起舞身邊的人總是露出無法理解的表情？來這裡就對了！來參加這場一起跳舞的聚會，也會在每一...',
+    category: '演出'
+  },
+  {
+    data: '30 MAY 2023',
+    img: '/a3.png',
+    subtitle: '哈利波特馬拉松',
+    txt: '每次身邊有人開啟哈利波特的話題，自己永遠都是聽不懂的那個麻瓜？看大家在討論魁地奇、用咒語鬥法的時候，自己永遠是陪笑的那個人？穿...',
+    category: '聯誼'
+  },
+  {
+    data: '12 June 2023',
+    img: '/a4.png',
+    subtitle: '皮卡丘排球大賽',
+    txt: '還記得小時候玩的小遊戲嗎？總是有朋友吹噓自己獨孤求敗、只求一敗？是時候該展現真正的實力了！本活動採用瑞士制賽程，以絕對公平的方...',
+    category: '遊戲競賽'
+  },
+  {
+    data: '25 June 2023',
+    img: '/a5.png',
+    subtitle: '酒精路跑',
+    txt: '身邊總是有對自己酒量有高度自信的朋友嗎？拉著他/她一起來參加酒精路跑吧！一起拍下第一杯直到倒下為止的照片，一起喝遍市區內各家極...',
+    category: '社群活動'
+  },
+  {
+    data: '9 July 2023',
+    img: '/a6.png',
+    subtitle: '展覽——我的房間',
+    txt: '每個人的房間總會有那麼一兩個能代表自己的物事，或許是再平凡不過的牙刷、馬克杯，或許有那些別人的房間從沒出現過的小東西——那些能...',
+    category: '展覽'
+  }
+])
 
 
 
 </script>
 
 <template>
+  <!-- 大看板 -->
   <h1 class="main_bg">
     <div class="text_box">
       <h2 class="title">19 MAY 2023</h2>
@@ -18,8 +101,25 @@ const input = ref('')
           帶上啤酒、野餐墊，讓我們在Live House外面一起開場「沒有草東的派對」吧！</p>
       </h3>
     </div>
-
   </h1>
+  <!-- 活動專區 -->
+  <div class="Activity">
+    <div class="Activity_box" :class="{ yw: index === 5 }" v-for="(image, index) in pic_txt" :key="index + '9'">
+      <picture>
+        <source :srcset="image.pic" media="(min-width: 576px)">
+        <img :src="image.pic_phnoe" alt="" class="Activity_box_pic">
+      </picture>
+      <p class="Activity_box_txt" :class="{ yw_txt: index === 5 }">{{ image.txt }}</p>
+    </div>
+  </div>
+  <!-- 近期活動 -->
+  <board :title="'RECENT'" :txt="'近期活動'" />
+  <!-- 活動連結 -->
+  <section class="card_group">
+    <Card v-for="(image, index) in card_group" :key="index + '9'" :data="image" />
+  </section>
+  <board :title="'ONLINE'" :txt="'線上活動'"/>
+
 </template>
 
 <style lang="scss" scoped>
@@ -38,6 +138,10 @@ const input = ref('')
   @include pad {
     width: 85%;
     background-image: url('/bg_desktop.png');
+  }
+
+  @include pc {
+    width: 90%;
   }
 
   .title {
@@ -73,6 +177,7 @@ const input = ref('')
 
     &> :last-child {
       display: none;
+
       @include pad {
         display: block;
         font-size: 16px;
@@ -92,5 +197,114 @@ const input = ref('')
     justify-content: space-between;
   }
 
+}
+
+.Activity {
+  width: 95%;
+  min-height: 232px;
+  margin: 0 auto;
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 8px;
+
+  @include pad {
+    width: 85%;
+    row-gap: 8px;
+  }
+
+  @include pc {
+    flex-wrap: nowrap;
+    width: 90%;
+    justify-content: space-between;
+  }
+
+  .yw {
+    background-color: black;
+    line-height: 30px;
+
+    @include pad {
+      line-height: 40px;
+    }
+
+    @include pc {
+      line-height: 65px;
+    }
+  }
+
+  &_box:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 9px red;
+  }
+
+  &_box {
+    width: 31%;
+    height: 110px;
+    border: 2px solid black;
+    text-align: center;
+    padding-top: 20px;
+
+    @include pad {
+      height: 148px;
+    }
+
+    @include pc {
+      max-width: 196px;
+      height: 196px;
+      padding-top: 40px;
+    }
+
+    &_pic {
+      @include pad {
+        height: 80px;
+      }
+    }
+
+    &_txt {
+      font-weight: 700;
+      font-size: 16px;
+      padding-top: 8px;
+
+      @include pc {
+        font-size: 24px;
+      }
+    }
+
+    .yw_txt {
+      color: yellow;
+      font-size: 24px;
+      word-break: break-all;
+      width: 50%;
+      margin: 0 auto;
+      transform: translateY(-34px);
+
+      @include pad {
+        width: 50%;
+        font-size: 36px;
+      }
+
+      @include pc {
+        width: 73%;
+        font-size: 48px;
+        transform: translateY(-75px);
+      }
+
+    }
+
+  }
+
+}
+
+.card_group {
+  margin-top: 24px;
+  padding: 0 12px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 24px;
+
+  @include pc {
+    row-gap: 48px;
+    padding: 0 62px;
+  }
 }
 </style>

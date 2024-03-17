@@ -2,8 +2,9 @@
 import { ref } from 'vue'
 import board from '../components/RecentActivities.vue'
 import Card from '../components/Card.vue'
-
-
+import Tag from '../components/Tag.vue'
+import Mq from '../components/Marquee.vue'
+import Ad from '../components/Advertise.vue'
 const pic_txt = ref(
   [
     {
@@ -86,6 +87,32 @@ const card_group = ref([
   }
 ])
 
+const ad_group = ref([
+  {
+    title: '社群活動',
+    txt: '無聲派對-閉閉嘴dancing',
+    img: '/p1.png',
+    rotate: '0'
+  },
+  {
+    title: '藝文活動',
+    txt: '拯救老店大作戰',
+    img: '/p2.png',
+    rotate: '2'
+  },
+  {
+    title: '自我覺察',
+    txt: '內觀修行-部落篇',
+    img: '/p3.png',
+    rotate: '-2'
+  },
+  {
+    title: '聯誼活動',
+    txt: '賞櫻野餐',
+    img: '/p4.png',
+    rotate: '2'
+  },
+])
 
 
 </script>
@@ -118,7 +145,40 @@ const card_group = ref([
   <section class="card_group">
     <Card v-for="(image, index) in card_group" :key="index + '9'" :data="image" />
   </section>
-  <board :title="'ONLINE'" :txt="'線上活動'"/>
+  <board :title="'ONLINE'" :txt="'線上活動'" />
+  <!-- gpt -->
+  <section class="gpt">
+    <!-- 照片 -->
+    <div class="gpt_pic">
+      <source srcset="/img.png" media="(min-width: 996px)">
+      <img src="/computer.png" alt="">
+    </div>
+    <!-- 文字區塊 -->
+    <div class="gpt_context">
+      <h4>切特居批踢</h4>
+      <div class="tag_group">
+        <Tag :word="'競賽'" />
+        <Tag :word="'科技'" />
+        <Tag :word="'有趣'" />
+      </div>
+      <p>
+        最近網路上很流行的AI程式ChatGPT，可以用來聊天或是查詢、整理各種資料，不同的應用方式如雨後春筍般冒出來。
+      </p>
+      <p class="gpt_context_sec">
+        這個活動讓大家把自己最有特色的使用方法提出來讓大家參考，也會投票出最有趣的用法。該讓其他人知道自己使用ChatGPT的姿勢才是最特別的那個了！
+      </p>
+      <button class="gpt_context_btn">查看活動詳情 >></button>
+    </div>
+  </section>
+  <!-- 跑馬燈 -->
+  <section class="mq">
+    <Mq />
+  </section>
+  <!-- 卡片活動 -->
+  <section class="advertise">
+    <Ad v-for="(data, index) in ad_group" :key="index + '9'" :title="data.title" :img="data.img" :txt="data.txt"
+      :rotate="data.rotate" />
+  </section>
 
 </template>
 
@@ -254,11 +314,7 @@ const card_group = ref([
       padding-top: 40px;
     }
 
-    &_pic {
-      @include pad {
-        height: 80px;
-      }
-    }
+
 
     &_txt {
       font-weight: 700;
@@ -305,6 +361,132 @@ const card_group = ref([
   @include pc {
     row-gap: 48px;
     padding: 0 62px;
+  }
+}
+
+.gpt {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+
+  @include pc {
+    flex-direction: row;
+
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 32px;
+    align-items: end;
+  }
+
+
+
+  &_pic {
+    width: 93.3%;
+    margin: 0 auto;
+
+    @include pad {
+      width: 90%;
+    }
+
+    @include pc {
+      width: 50%;
+    }
+  }
+
+  &_pic img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  &_context {
+    font-family: "Noto Serif TC";
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25.87px;
+    padding: 0 12px;
+    margin-top: 12px;
+
+    @include pad {
+      font-size: 26px;
+      line-height: 32.98px;
+      width: 93%;
+      margin: 0 auto;
+      margin-top: 12px;
+    }
+
+    @include pc {
+      font-size: 32px;
+      line-height: 45.98px;
+      margin: 0 auto;
+      margin-top: 12px;
+      width: 50%;
+    }
+
+    p {
+      font-family: "Noto Sans TC";
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    .gpt_context_sec {
+      width: 100%;
+
+      @include pc {
+        width: 95%;
+      }
+    }
+
+    &_btn {
+      width: 100%;
+      background-color: black;
+      color: white;
+      padding: 16px 0px;
+      font-family: "Noto Sans TC";
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 12px;
+
+      @include pc {
+        margin-top: 32px;
+
+      }
+    }
+
+  }
+
+
+}
+
+.tag_group {
+  display: flex;
+  column-gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.mq {
+  background-color: black;
+  margin-top: 32px;
+
+  @include pad {
+    margin-top: 45px;
+  }
+
+  @include pc {
+    margin-top: 60px;
+  }
+}
+
+.advertise {
+  display: flex;
+  flex-direction: column;
+  @include pc {
+    width: 92%;
+    margin: 0 auto;
+    flex-direction: row;
   }
 }
 </style>

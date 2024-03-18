@@ -11,8 +11,10 @@ const prop = defineProps({
 
 <template>
   <div class="box" :style="{ transform: 'rotate(' + prop.rotate + 'deg)' }">
-    <span>{{ prop.title }}</span>
-    <img :src="prop.img" alt="">
+    <p class="title">{{ prop.title }}</p>
+    <div>
+      <img :src="prop.img" alt="">
+    </div>
     <p>{{ prop.txt }}</p>
   </div>
 </template>
@@ -22,47 +24,56 @@ const prop = defineProps({
 
 .box {
   border: 2px solid #030303;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 48px;
-  display: flex;
-  flex-direction: column;
+  padding: 12px 12px 0px 12px;
   position: relative;
-  flex-wrap: wrap;
+  width: 85%;
+  margin: 0 auto;
 
-
+  @include pad {
+    width: 45%;
+    margin: 0 auto;
+  }
 
   @include pc {
-    width: 23%;
-    overflow: hidden;
+    width: 21%;
+    margin: 0 auto;
   }
 
-  span {
-    font-family: "Noto Serif TC";
-    font-weight: 700;
-    font-size: 16px;
-    padding: 9.1px 16.52px;
-    background-color: #FFFFFF;
-    transform: rotate(-5deg);
+  .title {
     position: absolute;
-    top: -5%;
-    left: 30%;
-  }
+    top: -4%;
+    left: 36%;
+    background-color: #FFFFFF;
+    padding: 9.1px 16.52px;
+    transform: rotate(-5deg);
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Noto Serif TC";
 
-  .img {
-    max-width: 100%;
-    height: 100%;
-    object-fit: cover;
-    vertical-align: middle;
+    @include pc {
+      top: -10%;
+    }
+
   }
 
   p {
-    font-family: "Noto Serif TC";
-    font-weight: 700;
     font-size: 18px;
+    font-weight: 700;
+    font-family: "Noto Serif TC";
     margin-top: 12px;
     margin-bottom: 32px;
   }
+
+  div {
+    img {
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      object-fit: cover;
+    }
+
+  }
+
 
 }
 </style>

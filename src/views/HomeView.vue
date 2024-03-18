@@ -114,6 +114,20 @@ const ad_group = ref([
   },
 ])
 
+const icon_group = ref([
+  {
+    img: '/q3.png',
+    txt: '7tao.event@gmail.com'
+  },
+  {
+    img: '/q1.png',
+    txt: '09123123123'
+  },
+  {
+    img: '/q2.png',
+    txt: '7TAO七逃'
+  }
+])
 
 </script>
 
@@ -178,6 +192,33 @@ const ad_group = ref([
   <section class="advertise">
     <Ad v-for="(data, index) in ad_group" :key="index + '9'" :title="data.title" :img="data.img" :txt="data.txt"
       :rotate="data.rotate" />
+  </section>
+  <!-- 跑馬燈 -->
+  <section class="mq">
+    <Mq />
+  </section>
+  <!-- 訂閱我們 -->
+  <section class="subscribe">
+    <div class="subscribe_left">
+      <div class="subscribe_left_text">
+        <p>#FOLLOW US</p>
+      </div>
+      <div class="subscribe_left_content">
+        <p>想第一時間獲得新奇有趣的活動資訊？
+          追蹤我們的社群吧！
+          也歡迎你聯繫我們，提供好玩有趣的活動企劃。
+        </p>
+        <ul class="symbol_box">
+          <li v-for=" (data, index) in icon_group" :key="index + '9'">
+            <div class="symbol">
+              <img :src="data.img" alt="">
+            </div>
+            {{ data.txt }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </section>
 
 </template>
@@ -481,12 +522,75 @@ const ad_group = ref([
 }
 
 .advertise {
+  margin-top: 48px;
   display: flex;
   flex-direction: column;
-  @include pc {
-    width: 92%;
-    margin: 0 auto;
+  row-gap: 20.3px;
+
+  @include pad {
     flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 30px;
   }
+
+  @include pc {
+    flex-wrap: nowrap;
+    row-gap: 0px;
+    margin: 48px
+  }
+}
+
+.subscribe {
+  margin-top: 32px;
+  padding: 0 12px;
+
+  &_left {
+    border: 2px solid #030303;
+
+    &_text {
+      border-bottom: 2px solid #030303;
+      padding: 12px 0px 16px 12px;
+
+      p {
+        font-family: "Noto Serif TC";
+        font-weight: 700;
+        font-size: 24px;
+      }
+    }
+
+    &_content {
+      padding: 16px 0px 0px 12px;
+
+      p {
+        font-family: "Noto Sans TC";
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 16px
+      }
+
+      .symbol_box {
+        li {
+          display: flex;
+          align-items: center;
+          font-family: "Noto Sans TC";
+          font-size: 16px;
+          font-weight: 400;
+          margin-bottom: 16px;
+        }
+      }
+
+      .symbol {
+        width: 32px;
+        height: 32px;
+        background-color: #030303;
+        text-align: center;
+        margin-right: 16px;
+        line-height: 40px;
+      }
+
+    }
+
+  }
+
 }
 </style>

@@ -129,6 +129,8 @@ const icon_group = ref([
   }
 ])
 
+
+
 </script>
 
 <template>
@@ -199,13 +201,14 @@ const icon_group = ref([
   </section>
   <!-- 訂閱我們 -->
   <section class="subscribe">
+    <!-- 左邊 -->
     <div class="subscribe_left">
       <div class="subscribe_left_text">
         <p>#FOLLOW US</p>
       </div>
       <div class="subscribe_left_content">
-        <p>想第一時間獲得新奇有趣的活動資訊？
-          追蹤我們的社群吧！
+        <p>想第一時間獲得新奇有趣的活動資訊？<br />
+          追蹤我們的社群吧！<br />
           也歡迎你聯繫我們，提供好玩有趣的活動企劃。
         </p>
         <ul class="symbol_box">
@@ -218,7 +221,20 @@ const icon_group = ref([
         </ul>
       </div>
     </div>
-
+    <!-- 右邊 -->
+    <div class="subscribe_left">
+      <div class="subscribe_left_text">
+        <p>#subscribe us</p>
+      </div>
+      <div class="subscribe_left_content ">
+        <p>訂閱電子報送折價券！<br />
+          定期精選文章資訊及最新優惠資訊，<br />
+          還不通通給我訂閱起來？
+        </p>
+        <input type="text" placeholder="輸入Email" class="subscribe_mail">
+        <button class="subscribe_btn">確認訂閱 >></button>
+      </div>
+    </div>
   </section>
 
 </template>
@@ -543,9 +559,28 @@ const icon_group = ref([
 .subscribe {
   margin-top: 32px;
   padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+
+  @include pad {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+
+
 
   &_left {
     border: 2px solid #030303;
+
+    @include pad {
+      width: 50%;
+    }
+
+    @include pc {
+      width: 50%;
+    }
 
     &_text {
       border-bottom: 2px solid #030303;
@@ -560,6 +595,11 @@ const icon_group = ref([
 
     &_content {
       padding: 16px 0px 0px 12px;
+      overflow: hidden;
+
+      @include pc {
+        padding-left: 32px;
+      }
 
       p {
         font-family: "Noto Sans TC";
@@ -569,6 +609,10 @@ const icon_group = ref([
       }
 
       .symbol_box {
+        @include pc {
+          margin-top: 32px;
+        }
+
         li {
           display: flex;
           align-items: center;
@@ -587,10 +631,43 @@ const icon_group = ref([
         margin-right: 16px;
         line-height: 40px;
       }
-
     }
-
   }
+}
 
+.subscribe_mail {
+  padding: 16px 0px 16px 24px;
+  border: 2px solid #030303;
+  width: 97%;
+  margin: 0 auto;
+  margin-bottom: 16px;
+
+  @include pad {}
+
+  @include pad {
+    margin-top: 32px;
+    margin-bottom: 58px;
+  }
+}
+
+.subscribe_mail::placeholder {
+  font-family: "Noto Sans TC";
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.subscribe_btn {
+  color: white;
+  font-family: "Noto Sans TC";
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #030303;
+  width: 105%;
+  padding: 12px 0px;
+  margin-left: -12px;
+
+  @include pad {
+    margin-left: -32px;
+  }
 }
 </style>

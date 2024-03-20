@@ -36,7 +36,7 @@ onMounted(() => {
 
     &:nth-child(2) {
       animation: mq2 40s linear infinite;
-      animation-delay: -20.5s;
+      animation-delay: -20s;
     }
   }
 }

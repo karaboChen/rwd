@@ -226,17 +226,23 @@ const icon_group = ref([
       <div class="subscribe_left_text">
         <p>#subscribe us</p>
       </div>
-      <div class="subscribe_left_content ">
-        <p>訂閱電子報送折價券！<br />
-          定期精選文章資訊及最新優惠資訊，<br />
-          還不通通給我訂閱起來？
-        </p>
-        <input type="text" placeholder="輸入Email" class="subscribe_mail">
+      <div class="mail_box">
+        <div>
+          <p>訂閱電子報送折價券！<br />
+            定期精選文章資訊及最新優惠資訊，<br />
+            還不通通給我訂閱起來？
+          </p>
+          <input type="text" placeholder="輸入Email" class="subscribe_mail">
+        </div>
         <button class="subscribe_btn">確認訂閱 >></button>
       </div>
     </div>
   </section>
-
+  <!-- 結尾語 -->
+  <section class="end_box">
+    <h2>此刻打盹，你將做夢；此刻學習，你將圓夢</h2>
+    <p>——我也不知道誰說的</p>
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -560,22 +566,23 @@ const icon_group = ref([
   margin-top: 32px;
   padding: 0 12px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   row-gap: 24px;
 
-  @include pad {
+
+
+  @include pc {
     flex-direction: row;
-    flex-wrap: wrap;
   }
-
-
-
 
   &_left {
     border: 2px solid #030303;
+    width: 100%;
 
     @include pad {
-      width: 50%;
+      width: 45%;
+      margin: 0 auto;
     }
 
     @include pc {
@@ -585,17 +592,21 @@ const icon_group = ref([
     &_text {
       border-bottom: 2px solid #030303;
       padding: 12px 0px 16px 12px;
+      width: 100%;
 
       p {
         font-family: "Noto Serif TC";
         font-weight: 700;
         font-size: 24px;
+
+        @include pc {
+          padding-left: 25px;
+        }
       }
     }
 
     &_content {
       padding: 16px 0px 0px 12px;
-      overflow: hidden;
 
       @include pc {
         padding-left: 32px;
@@ -605,12 +616,14 @@ const icon_group = ref([
         font-family: "Noto Sans TC";
         font-size: 16px;
         font-weight: 400;
-        margin-bottom: 16px
+        margin-bottom: 16px;
+        line-height: 24px;
       }
 
       .symbol_box {
         @include pc {
           margin-top: 32px;
+
         }
 
         li {
@@ -635,39 +648,96 @@ const icon_group = ref([
   }
 }
 
-.subscribe_mail {
-  padding: 16px 0px 16px 24px;
-  border: 2px solid #030303;
-  width: 97%;
-  margin: 0 auto;
-  margin-bottom: 16px;
-
-  @include pad {}
+.mail_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @include pad {
-    margin-top: 32px;
-    margin-bottom: 58px;
+    height: 83.1%;
   }
+
+
+
+  div {
+    padding: 16px 0px 0px 12px;
+    margin-bottom: auto;
+
+    @include pc {
+      padding-left: 32px;
+    }
+
+    p {
+      font-family: "Noto Sans TC";
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
+
+  .subscribe_mail {
+    width: 95%;
+    margin: 0 auto;
+    padding: 16px 0px 16px 24px;
+    border: 2px solid black;
+    margin: 16px 0px;
+
+    @include pad {
+      margin-top: 22px;
+    }
+
+    @include pc {
+      margin-top: 32px;
+    }
+  }
+
+  .subscribe_mail::placeholder {
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+  }
+
+  .subscribe_btn {
+    padding: 16px 0;
+    background-color: #030303;
+    color: white;
+    font-family: "Noto Sans TC";
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
 }
 
-.subscribe_mail::placeholder {
-  font-family: "Noto Sans TC";
-  font-weight: 400;
-  font-size: 16px;
-}
+.end_box {
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  text-align: center;
+  margin-top: 48px;
 
-.subscribe_btn {
-  color: white;
-  font-family: "Noto Sans TC";
-  font-weight: 700;
-  font-size: 16px;
-  background-color: #030303;
-  width: 105%;
-  padding: 12px 0px;
-  margin-left: -12px;
+  h2 {
+    margin-top: 48px;
+    margin-bottom: 12px;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-weight: 700;
 
-  @include pad {
-    margin-left: -32px;
+    @include pc {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+  }
+
+  p {
+    margin-bottom: 48px;
+    font-family: "Noto Sans TC";
+    font-size: 14px;
+    font-weight: 700;
+
+    @include pc {
+      font-size: 18px;
+    }
   }
 }
 </style>
